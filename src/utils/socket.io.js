@@ -1,5 +1,5 @@
 const ProductManager = require("../ProductManager");
-const Product = new ProductManager("./src/assets/product.json");
+const Product = new ProductManager("./assets/product.json");
 const { Server } = require("socket.io");
 let io;
 

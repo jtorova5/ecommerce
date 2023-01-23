@@ -1,5 +1,5 @@
 const ProductManager = require("../ProductManager");
-const Product = new ProductManager("./src/assets/product.json");
+const Product = new ProductManager("./assets/product.json");
 
 const getProducts = async (req, res) => {
   const { limit: limite = "" } = req.query;
@@ -57,10 +57,4 @@ const deleteProduct = async (req, res) => {
   }
 };
 
-module.exports = {
-  getProducts,
-  getProductId,
-  addProduct,
-  updateProduct,
-  deleteProduct,
-};
+module.exports = {getProducts, getProductId, addProduct, updateProduct, deleteProduct,};

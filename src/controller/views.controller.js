@@ -1,6 +1,6 @@
 const ProductManager = require("../ProductManager");
 const { emitDeleteProduct, emitaddRealtime } = require("../utils/socket.io");
-const Product = new ProductManager("./src/assets/product.json");
+const Product = new ProductManager("./assets/product.json");
 
 const views = async (req, res) => {
   let products = await Product.getProducts();
@@ -37,9 +37,4 @@ const addRealTimeProduct = async (req, res) => {
   }
 };
 
-module.exports = {
-  views,
-  realTimeProduct,
-  deleteRealTimeProduct,
-  addRealTimeProduct,
-};
+module.exports = {views, realTimeProduct, deleteRealTimeProduct, addRealTimeProduct,};

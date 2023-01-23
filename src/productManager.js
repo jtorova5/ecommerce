@@ -1,4 +1,3 @@
-
 const fs = require("fs");
 
 const writeFile = (path, Products) =>
@@ -36,18 +35,25 @@ class ProductManager {
   };
 
   addProduct = async (pro) => {
-
-    if (pro.title || pro.description || pro.code || pro.price || pro.Status || pro.stock || pro.category) {
+    if (
+      pro.title ||
+      pro.description ||
+      pro.code ||
+      pro.price ||
+      pro.Status ||
+      pro.stock ||
+      pro.category
+    ) {
       const { products } = await readFile(this.path);
       this.Product = products;
       this.Product.push({
         id: this.Product.length,
-        ...pro
+        ...pro,
       });
       await writeFile(this.path, this.Product);
-      return {msg:"Product added"};
+      return { msg: "Product added" };
     } else {
-      return { msg:"There are some fields missing" };
+      return { msg: "There are some fields missing" };
     }
   };
 
@@ -57,42 +63,45 @@ class ProductManager {
     if (ProductId) {
       return ProductId;
     } else {
-      return {msg:"Product not found"} ;
+      return { msg: "Product not found" };
     }
   };
 
-  UpdateProduct = async (id, body) => {
-
+  updateProduct = async (id, body) => {
     const { products } = await readFile(this.path);
-    this.Product = products
-    const UpdateProduct = this.Product.findIndex((element) => element.id === id);
-    console.log(UpdateProduct)
+    this.Product = products;
+    const updateProduct = this.Product.findIndex(
+      (element) => element.id === id
+    );
+    console.log(updateProduct);
 
-    if (UpdateProduct !== -1) {
-      const id = this.Product[UpdateProduct].id;
-      this.Product[UpdateProduct] = {
+    if (updateProduct !== -1) {
+      const id = this.Product[updateProduct].id;
+      this.Product[updateProduct] = {
         id,
-        ...body
+        ...body,
       };
       await writeFile(this.path, this.Product);
-      return ("Product updated");
+      return "Product updated";
     } else {
-      return { msg:"Product to update wasn't found" };
+      return { msg: "Product to update wasn't found" };
     }
-
   };
 
   deleteProduct = async (id) => {
     const { products } = await readFile(this.path);
-    this.Product = products
-    const FindIndex = this.Product.findIndex((element) => element.id === id);
+    this.Product = products;
+    const FindIndex = this.Product.findIndex(
+      (element) => element.id === parseInt(id)
+    );
     if (FindIndex !== -1) {
       const newArrayProducts = this.Product.filter(
-        (product) => product.id !== id);
+        (product) => product.id !== parseInt(id)
+      );
       await writeFile(this.path, newArrayProducts);
-      return {msg: "Product deleted"};;
+      return { msg: "Product deleted" };
     } else {
-      return { msg:"Product to delete wasn't found" };
+      return { msg: "Product to delete wasn't found" };
     }
   };
 }

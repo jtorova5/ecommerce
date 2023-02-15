@@ -23,12 +23,11 @@ const addProductToCart = async (req, res) => {
     const { cid, pid } = req.params;
     const products = await Product.getProductById(pid);
     if (products) {
-        const resp = await Carts.addProductCart(cid, products.id);
+        const resp = await Carts.addProductToCart(cid, products.id);
         res.json({ msg:"Product added"})  
         }else {
         res.json({ msg:"Product not found"})  
     }
-    
 }
 
-module.exports = {createCarts, getCarts, addProductToCart}
+module.exports = {createCarts, getCarts, addProductToCart};

@@ -11,14 +11,20 @@ const cartsSchema = new mongoose.Schema([
       type: Number,
       default: 0,
     },
-    products: {
+    products: [{
       _id: false,
-      type: Array,
-      default: [],
+      id: String,
+      title: String,
+      description: String,
+      qanttity: {
+        type: Number,
+        default: 1,
+      }
     }
+    ]
   }
 ]
-) 
+)
 
 const cartsModel = mongoose.model('carts', cartsSchema);
 

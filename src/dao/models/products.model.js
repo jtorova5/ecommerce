@@ -28,8 +28,8 @@ const productSchema = new mongoose.Schema({
         require: true, 
     },
     thumbnail:String,
-
 })
+
 const productsModel = mongoose.model('products', productSchema);
 
 module.exports = productsModel;

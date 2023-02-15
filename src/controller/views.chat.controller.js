@@ -2,7 +2,7 @@
 const dbChatsManager = require('../dao/mongoManager/dbChatsManager.js')
 const Chats = new dbChatsManager()
 const { emitMessage } = require('../utils/socket.io')
-const { emitDeleteMj } = require('../utils/socket.io')
+const { emitDeleteMs } = require('../utils/socket.io')
 
 const sendMessage = async (req, res) => {
     const message = req.body
@@ -43,7 +43,7 @@ const deleteMessage = async (req, res) => {
             msg: 'Could not be deleted',
         });
     } else {
-        emitDeleteMj(deleteMessaje)
+        emitDeleteMs(deleteMessaje)
         return res.json({
             msg: 'Message deleted',
             chats: deleteMessaje
@@ -51,4 +51,4 @@ const deleteMessage = async (req, res) => {
     }
 }
 
-module.exports = { sendMessage, getSendMessage, deleteMessage }
+module.exports = {sendMessage, getSendMessage, deleteMessage};

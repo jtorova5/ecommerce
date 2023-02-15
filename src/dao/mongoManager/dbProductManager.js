@@ -2,6 +2,7 @@
 const productModel = require('../models/products.model')
 
 class dbProductManager {
+    
     constructor() {
         this.products = []
     }
@@ -11,14 +12,12 @@ class dbProductManager {
             if (limite) {
                 const products = await productModel.find().limit(limite);
                 return products
-
             } else {
                 const products = await productModel.find();
                 return products
             }
         } catch (error) {
             return { msg: "Error getting products" }
-
         }
     }
 
@@ -26,10 +25,8 @@ class dbProductManager {
         try {
             const newproduct = await productModel.create(product);
             return ({ msg: "Product created", newproduct })
-
         } catch (error) {
             return { msg: "Error creating product" }
-
         }
     }
 
@@ -47,7 +44,6 @@ class dbProductManager {
         try {
             const UpdateProduct = await productModel.findByIdAndUpdate(id, { title, description, code, price, status, stock, category, thumbnail });
             return UpdateProduct
-
         } catch (error) {
             return { msg: "Error updating product" }
         }
@@ -58,9 +54,7 @@ class dbProductManager {
         try {
             const deleteproduct = await productModel.findByIdAndDelete(id);
             return deleteproduct
-
         } catch (error) {
-
             return { msg: "Error deleting product" }
         }
     }

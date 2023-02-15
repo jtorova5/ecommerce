@@ -18,7 +18,7 @@ class CartManager {
         this.carts = [];
     }
 
-    addCart = async () => {
+    CreateCarts = async () => {
         const carts = await readFile(this.path);
         const id = carts.length
         carts.push({
@@ -29,7 +29,7 @@ class CartManager {
         return id;
     }
 
-    getCart = async (id) => {
+    getCarts = async (id) => {
         const carts = await readFile(this.path);
         if (carts[id]) {
             return carts[id];

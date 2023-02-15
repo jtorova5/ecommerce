@@ -85,18 +85,16 @@ class ProductManager {
     const { products } = await readFile(this.path);
     this.Product = products;
     const FindIndex = this.Product.findIndex(
-      (element) => element.id === parseInt(id)
-    );
+      (element) => element.id === parseInt(id))
     if (FindIndex !== -1) {
       const newArrayProducts = this.Product.filter(
-        (product) => product.id !== parseInt(id)
-      );
+        (product) => product.id !== parseInt(id));
       await writeFile(this.path, newArrayProducts);
       return { msg: "Product deleted" };
     } else {
       return { msg: "Product to delete wasn't found" };
     }
-  };
+  }
 }
 
 module.exports = ProductManager;

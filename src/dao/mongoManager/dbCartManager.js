@@ -22,7 +22,7 @@ class dbCartsManager {
             const cart = await cartsModel.findById(id);
             return cart
         } catch (error) {
-            return { msg: "Error displaying carts" }
+            return undefined;
         }
     }
 

@@ -1,17 +1,18 @@
 
 const express = require('express');
+const { Server } = require('socket.io');
+const { connectionSocket } = require('./utils/socket.io')
 const handlebars = require('express-handlebars');
 const productsRoute = require('./routes/products.routes');
 const cartsRoute = require('./routes/carts.routes')
-const productsRouteDB = require('./routes/products.routes.db');
-const cartsRouteDB = require('./routes/carts.routes.db');
-const viewRoute = require('./routes/views.routes');
-const chatsRoute = require('./routes/chats.routes');
-const productModel = require('./dao/models/products.model');
+const productsRouteDB = require('./routes/products.routes.db')
+const cartsRouteDB = require('./routes/carts.routes.db')
+const viewRoute = require('./routes/views.routes')
+const chatsRoute = require('./routes/chats.routes')
 const server = express();
 const mongoose = require('mongoose');
 
-mongoose.set("strictQuery", false)
+mongoose.set('strictQuery', false);
 
 let port = 8080;
 
@@ -38,10 +39,13 @@ server.use("/api/cartsDB/", cartsRouteDB);
 server.use("/api/chats/", chatsRoute);
 
 //Connection with MongoDB Atlas Database
-const test = async () => {
-    await mongoose.connect('mongodb+srv://admin:123@codercluster.ew29ctl.mongodb.net/?retryWrites=true&w=majority',
-    );
-    console.log('Successfully connected with MongoDB Atlas');
-};
-
-test();
+mongoose.connect('mongodb+srv://admin:123@codercluster.ew29ctl.mongodb.net/?retryWrites=true&w=majority',
+    (error) => {
+        if (error) {
+            console.log('Error connecting with MongoDB Atlas', error);
+            process.exit();
+        } else {
+            console.log('Successfully connected with MongoDB Atlas');
+        }
+    })
+connectionSocket(httpServer);

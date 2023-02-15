@@ -1,11 +1,12 @@
 
-const ProductManager = require("../dao/fsManager/ProductManager");
+const ProductManager = require("../dao/mongoManager/dbProductManager");
 const Product = new ProductManager('./assets/product.json');
+//const CartController = require("./carts.controller.db");
 const { emitDeleteProduct } = require("../utils/socket.io");
-const { emitaddRealtime } = require("../utils/socket.io");
+const { emitAddRealtime } = require("../utils/socket.io");
 
 const views = async (req, res) => {
-    let products = await Product.getProducts();
+    let products = await Product.getProduct();
     res.render("home", {
         products
     });
@@ -17,7 +18,7 @@ const realTimeProduct = async (req, res) => {
 
 const deleteRealTimeProduct = async (req, res) => {
     const id = +req.params.pid
-    const Delete = await Product.deleteProduct(id);
+    const Delete = await Product.deleteProductId(id);
     if (Delete.erro) {
         res.json(Delete);
     } else {
@@ -32,7 +33,7 @@ const addRealTimeProduct = async (req, res) => {
     if (add.erro) {
         res.json(add)
     } else {
-        emitaddRealtime(add)
+        emitAddRealtime(add)
         res.json(add);
     }
 }
@@ -41,4 +42,4 @@ const renderChats = (req, res) => {
     res.render('chats')
 }
 
-module.exports = {views, realTimeProduct, deleteRealTimeProduct, addRealTimeProduct, renderChats}
+module.exports = {views, realTimeProduct, deleteRealTimeProduct, addRealTimeProduct, renderChats};
